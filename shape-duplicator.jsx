@@ -6,7 +6,11 @@
 //The main idea is to recursively walk over all the properties and property groups
 //of a shape layer and then to create similar objects with similar hierarchy in another group
 
-//Dashes and gaps for stroke are now not supported
+
+//Known troubles
+//Stroke dashes and gaps are now not supported
+//Gradients are not copied
+
 
 //Nik Ska, 2013, CC-BY
 
