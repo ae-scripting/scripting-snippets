@@ -20,8 +20,7 @@ duplicateShapeIntoGroup(donor, recipient)
 app.endUndoGroup()
 
 function duplicateShapeIntoGroup(copyThis, pasteHere){
-		var tmp = copyThis.numProperties;
-		for(var i = 1; i <= tmp; i++){
+		for(var i = 1; i <= copyThis.numProperties; i++){
 			if(copyThis.property(i).propertyType != PropertyType.PROPERTY){
                 //if we got a group
                 //$.writeln("\n\ngroup__"+copyThis.property(i).matchName+' - ' +copyThis.property(i).name + '\n' + String(copyThis.property(i).hidden));
@@ -47,7 +46,7 @@ function duplicateShapeIntoGroup(copyThis, pasteHere){
                     //also breakpoints do not work here
                     //fuck this shit
                     pasteHere.addProperty(copyThis.property(i).matchName); 
-                    $.writeln(pasteHere.name + '\t' + copyThis.property(i).matchName + '\t' + pasteHere.canAddProperty(copyThis.property(i).matchName));
+                    //$.writeln(pasteHere.name + '\t' + copyThis.property(i).matchName + '\t' + pasteHere.canAddProperty(copyThis.property(i).matchName));
             }
 
             else{
