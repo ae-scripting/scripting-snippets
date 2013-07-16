@@ -8,9 +8,10 @@
 
 
 //Known troubles
-//Stroke dashes and gaps are now not supported
-//Gradients are not copied
-
+//--Stroke dashes and gaps are now not supported
+//--Gradients are not copied
+//--Keyframe Interpolation visually right, actually wrong
+//--Tangents are not supported
 
 //Nik Ska, 2013, CC-BY
 
@@ -83,5 +84,5 @@ function duplicateShapeIntoGroup(copyThis, pasteHere){
                 catch(err){null}
             }
         }
-	}
+    }
 }
