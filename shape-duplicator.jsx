@@ -13,7 +13,10 @@
 //now it's manual
 //use rd-GimmePropPath to get these paths
 var donor = app.project.item(2).layer("Shape Layer 1").property("Contents").property("Shape 1");
-var recipient = app.project.item(2).layer("Shape Layer 1").property("Contents").property("Group 1");
+
+//creating group with the same name
+var recipient = app.project.item(2).layer("Shape Layer 1").property("Contents").property("Group 1").property("ADBE Vectors Group").addProperty("ADBE Vector Group");
+recipient.name = donor.name
 
 app.beginUndoGroup("Duplicate shape")
 duplicateShapeIntoGroup(donor, recipient)
@@ -26,15 +29,16 @@ function duplicateShapeIntoGroup(copyThis, pasteHere){
                 //$.writeln("\n\ngroup__"+copyThis.property(i).matchName+' - ' +copyThis.property(i).name + '\n' + String(copyThis.property(i).hidden));
                 if(pasteHere.canAddProperty(copyThis.property(i).matchName)){
                     var pasteGroup = pasteHere.addProperty(copyThis.property(i).matchName);
-                    
-                    //setting name if we can
-                    try{
-                        pasteGroup.name = copyThis.property(i).name;
-                        pasteGroup.enabled = copyThis.property(i).enabled;
-                        }
-                    catch(err){null}
+                }
+            
+                else pasteGroup = copyThis.property(i);   
+                
+                //setting name if we can
+                try{
+                    pasteGroup.name = copyThis.property(i).name;
+                    pasteGroup.enabled = copyThis.property(i).enabled;
                     }
-                else pasteGroup = copyThis.property(i);
+                catch(err){null}
 
                 duplicateShapeIntoGroup(copyThis.property(i), pasteGroup)
         }
