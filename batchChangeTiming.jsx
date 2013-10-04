@@ -1,7 +1,11 @@
-﻿//script used for batch change timing of selected compositions
+//script used for batch change timing of selected compositions
 //or actve comp with all layers
 //useful when working with 3d passes
-//Nik Ska, 2013
+
+//0.1 - initial release
+//0.2 - code cleanup, true recursive function
+
+//CC-BY, Nik Ska, 2013
 
 
 var chTiming = this;
@@ -20,41 +24,58 @@ chTiming.buildGUI = function(thisObj){
 	var modeselect = g.add("dropdownlist", undefined, ["s", "fr"]);
 	modeselect.selection = 0;
 
-	var g2 = thisObj.w.add("group{orientation:'row', alignChildren: ['left', 'top']}");
-	var recChck = g2.add("checkbox", undefined, "Recursive");
-
 	timeText.onEnterKey = function(){
-		thisObj.changeTiming(Number(timeText.text), modeselect.selection.index, recChck.value);
+		thisObj.changeTiming(Number(timeText.text), modeselect.selection.index);
 	}
 
 	if (thisObj.w instanceof Window){
-    thisObj.w.center();
-    thisObj.w.show();
-  }
-  else thisObj.w.layout.layout(true);
+	    thisObj.w.center();
+	    thisObj.w.show();
+	}
+	else thisObj.w.layout.layout(true);
 }
 
-chTiming.changeTiming = function(_time, _sel, recursive){
-    function loopthrough(){
-      for(var i = 0; i<vids.length; i++){
-				if(_sel == 1){_time*=vids[i].frameDuration} //frames
-				vids[i].duration = _time;
-				for(var k = 1; k<=vids[i].layers.length; k++){
-					vids[i].layers[k].outPoint = vids[i].duration;
+chTiming.changeTiming = function(_time, _sel){
+    function loopthrough(compToChange){
+    	//first - loop through compositions
+    	for(var i = 0; i<compToChange.length; i++){
+			//if we work with frames - update time value
+			compToChange[i].duration = _time;
+
+			//now loop through comp's layers
+			for(var k = 1; k<=compToChange[i].layers.length; k++){
+				var layerToChange = compToChange[i].layers[k];
+
+				layerToChange.outPoint = compToChange[i].duration;
+
+				if(layerToChange.source instanceof CompItem){
+					//if the layer we stumble upon is a comp - go deeper
+					loopthrough([layerToChange.source]);
+					layerToChange.outPoint = compToChange[i].duration;
 				}
 			}
+		}
     }
-	var sel_vids = app.project.selection;
-		if(sel_vids.length>0){
-			var vids = sel_vids;
-      loopthrough()
-		}
-		else if(app.project.activeItem){
-			var vids = [app.project.activeItem];
-      loopthrough()
-		}
+    
+	var selComps = app.project.selection;
 
-		
+
+	if(app.project.activeItem){
+		$.writeln(app.project.activeItem.selected)
+		if(app.project.activeItem.selected){
+			_time = app.project.activeItem.selected[0].duration
+		}
+		var comps = [app.project.activeItem];
+	}
+	else if(selComps.length>0){
+		var comps = selComps;
+	}
+
+	if(_sel == 1) _time*=selComps[0].frameDuration //frames
+
+	app.beginUndoGroup("Change timing");
+	loopthrough(comps);
+	app.endUndoGroup();
 }
 
 chTiming.run()
