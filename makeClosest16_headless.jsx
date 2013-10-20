@@ -1,6 +1,9 @@
 //small script for making comp size divisible by 16
 //headless
 
+//Nik Ska, 2013
+//CC-SA-BY
+
 var activeComp = app.project.activeItem;  
 
 if(activeComp != null && activeComp instanceof CompItem){
