@@ -1,6 +1,6 @@
 //script used for batch change timing of selected compositions
 //or actve comp with all layers
-//useful when working with 3d passes
+//useful when working with 3d passes, motion design etc.
 
 //0.1 - initial release
 //0.2 - code cleanup, true recursive function
@@ -9,6 +9,7 @@
 
 
 var chTiming = this;
+this.version = 0.2;
 
 chTiming.run = function(){
     this.buildGUI(this);
@@ -17,7 +18,7 @@ chTiming.run = function(){
 chTiming.buildGUI = function(thisObj){
 	thisObj.w = (thisObj instanceof Panel) ? thisObj : new Window("palette", thisObj.scriptTitle, undefined, {resizeable:true});
 	thisObj.w.alignChildren = ['left', 'top']
-	thisObj.w.add("staticText", undefined, "Batch Timing Changer 0.1");
+	thisObj.w.add("staticText", undefined, "Batch Timing Changer "+thisObj.version);
 	var g = thisObj.w.add("group{orientation:'row', alignChildren: ['left', 'top']}");
 	var timeText = g.add("editText", undefined, "0");
 	timeText.size = [40, 20];
@@ -60,11 +61,11 @@ chTiming.changeTiming = function(_time, _sel){
 	var selComps = app.project.selection;
 
 
-	if(app.project.activeItem){
-		$.writeln(app.project.activeItem.selected)
-		if(app.project.activeItem.selected){
-			_time = app.project.activeItem.selected[0].duration
-		}
+	if(app.project.activeItem){ //if we are in a comp
+		$.writeln(app.project.activeItem.selectedLayers)
+		//if(app.project.activeItem.selectedLayers){
+		//	_time = app.project.activeItem.selectedLayers[0].duration
+		//}
 		var comps = [app.project.activeItem];
 	}
 	else if(selComps.length>0){
