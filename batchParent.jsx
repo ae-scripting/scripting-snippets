@@ -1,4 +1,4 @@
-//script used for batch change parenting layers
+//Batch parent layers
 //1. select the batch you want to parent
 //2. select the batch you want to parent it to
 
@@ -74,9 +74,11 @@ nsBatchParent.getThat = function(thisObj){
 }
 
 nsBatchParent.parentShit = function(thisObj){
+	app.beginUndoGroup("Batch Parenting");
 	for(var i = 0; i < thisObj.thisBatch.length; i++){
 		thisObj.thisBatch[i].parent = thisObj.thatBatch[i];
 	}
+	app.endUndoGroup();
 
 }
 
