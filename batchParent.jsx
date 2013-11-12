@@ -76,7 +76,9 @@ nsBatchParent.getThat = function(thisObj){
 nsBatchParent.parentShit = function(thisObj){
 	app.beginUndoGroup("Batch Parenting");
 	for(var i = 0; i < thisObj.thisBatch.length; i++){
-		thisObj.thisBatch[i].parent = thisObj.thatBatch[i];
+		if(thisObj.thisBatch[i]!=thisObj.thatBatch[i]){
+			thisObj.thisBatch[i].parent = thisObj.thatBatch[i];
+		}
 	}
 	app.endUndoGroup();
 
