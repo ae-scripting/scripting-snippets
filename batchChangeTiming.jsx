@@ -1,4 +1,4 @@
-//script used for batch change timing of selected compositions
+﻿//script used for batch change timing of selected compositions
 //or actve comp with all layers
 //useful when working with 3d passes, motion design etc.
 
@@ -39,22 +39,21 @@ chTiming.buildGUI = function(thisObj){
 }
 
 chTiming.changeTiming = function(_time, _sel){
-    function loopthrough(compToChange){
+    function loopthrough(compToChange, _newDuration){
     	//first - loop through compositions
     	for(var i = 0; i<compToChange.length; i++){
 			//if we work with frames - update time value
-			compToChange[i].duration = _time;
+			compToChange[i].duration = _newDuration;
 
 			//now loop through comp's layers
 			for(var k = 1; k<=compToChange[i].layers.length; k++){
 				var layerToChange = compToChange[i].layers[k];
-
 				layerToChange.outPoint = compToChange[i].duration;
 
 				if(layerToChange.source instanceof CompItem){
 					//if the layer we stumble upon is a comp - go deeper
-					loopthrough([layerToChange.source]);
-					layerToChange.outPoint = compToChange[i].durationt;
+					loopthrough([layerToChange.source], _newDuration - layerToChange.inPoint);
+					layerToChange.outPoint = compToChange[i].duration;
 				}
 			}
 		}
@@ -77,7 +76,7 @@ chTiming.changeTiming = function(_time, _sel){
 	if(_sel == 1) _time*=selComps[0].frameDuration //frames
 
 	app.beginUndoGroup("Change timing");
-	loopthrough(comps);
+	loopthrough(comps, _time);
 	app.endUndoGroup();
 }
 
