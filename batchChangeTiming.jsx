@@ -44,8 +44,6 @@ chTiming.changeTiming = function(_time, _sel){
     	for(var i = 0; i<compToChange.length; i++){
 			//if we work with frames - update time value
 			compToChange[i].duration = _newDuration;
-                $.writeln("new duration: " +  _newDuration);
-                $.writeln("comp duration: " +  compToChange[i].duration)
 			//now loop through comp's layers
 			for(var k = 1; k<=compToChange[i].layers.length; k++){
 				var layerToChange = compToChange[i].layers[k];
@@ -57,8 +55,7 @@ chTiming.changeTiming = function(_time, _sel){
 				if(layerToChange.source instanceof CompItem){
 					//if the layer we stumble upon is a comp - go deeper
 					if(compToChange[i].duration>layerToChange.inPoint){
-                           $.writeln(layerToChange.inPoint)
-						loopthrough([layerToChange.source], _newDuration);
+						loopthrough([layerToChange.source], _newDuration-layerToChange.inPoint);
 						layerToChange.outPoint = _newDuration;
 					}
 				}
