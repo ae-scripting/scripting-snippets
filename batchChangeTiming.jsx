@@ -49,12 +49,12 @@ chTiming.changeTiming = function(_time, _sel){
 			for(var k = 1; k<=compToChange[i].layers.length; k++){
 				var layerToChange = compToChange[i].layers[k];
 
-				layerToChange.outPoint = compToChange[i].duration-layerToChange.inPoint;
+				layerToChange.outPoint = compToChange[i].duration;
 
 				if(layerToChange.source instanceof CompItem){
 					//if the layer we stumble upon is a comp - go deeper
 					loopthrough([layerToChange.source]);
-					layerToChange.outPoint = compToChange[i].duration-layerToChange.inPoint;
+					layerToChange.outPoint = compToChange[i].durationt;
 				}
 			}
 		}
