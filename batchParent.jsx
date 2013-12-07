@@ -1,6 +1,6 @@
 //Batch parent layers
-//1. select the batch you want to parent
-//2. select the batch you want to parent it to
+//1. select the batch you want to set parents to
+//2. select the batch you want to parentthe first batch to
 
 //order matters
 

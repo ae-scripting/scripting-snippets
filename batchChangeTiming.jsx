@@ -4,12 +4,13 @@
 
 //0.1 - initial release
 //0.2 - code cleanup, true recursive function
+//0.3 - minor update
 
 //CC-BY, Nik Ska, 2013
 
 
 var chTiming = this;
-this.version = 0.2;
+this.version = 0.3;
 
 chTiming.run = function(){
     this.buildGUI(this);
@@ -47,12 +48,12 @@ chTiming.changeTiming = function(_time, _sel){
 			for(var k = 1; k<=compToChange[i].layers.length; k++){
 				var layerToChange = compToChange[i].layers[k];
 
-				layerToChange.outPoint = compToChange[i].duration;
+				layerToChange.outPoint = compToChange[i].duration-layerToChange.inPoint;
 
 				if(layerToChange.source instanceof CompItem){
 					//if the layer we stumble upon is a comp - go deeper
 					loopthrough([layerToChange.source]);
-					layerToChange.outPoint = compToChange[i].duration;
+					layerToChange.outPoint = compToChange[i].duration-layerToChange.inPoint;
 				}
 			}
 		}
