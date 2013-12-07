@@ -1,6 +1,6 @@
-﻿//script used for batch change timing of selected compositions
+﻿//Script used for batch change timing of selected compositions
 //or actve comp with all layers
-//useful when working with 3d passes, motion design etc.
+//It basically adjusts outPoints of all layers and precomps
 
 //0.1 - initial release
 //0.2 - code cleanup, true recursive function
@@ -15,7 +15,7 @@ chTiming.scriptTitle = "Batch Timing Changer";
 
 chTiming.run = function(){
     this.buildGUI(this);
-    }
+}
 
 chTiming.buildGUI = function(thisObj){
 	thisObj.w = (thisObj instanceof Panel) ? thisObj : new Window("palette", thisObj.scriptTitle, undefined, {resizeable:true});
@@ -48,12 +48,17 @@ chTiming.changeTiming = function(_time, _sel){
 			//now loop through comp's layers
 			for(var k = 1; k<=compToChange[i].layers.length; k++){
 				var layerToChange = compToChange[i].layers[k];
-				layerToChange.outPoint = compToChange[i].duration;
+
+				if(compToChange[i].duration>layerToChange.inPoint){
+					layerToChange.outPoint = compToChange[i].duration;
+				}
 
 				if(layerToChange.source instanceof CompItem){
 					//if the layer we stumble upon is a comp - go deeper
-					loopthrough([layerToChange.source], _newDuration - layerToChange.inPoint);
-					layerToChange.outPoint = compToChange[i].duration;
+					if(compToChange[i].duration>layerToChange.inPoint){
+						loopthrough([layerToChange.source], _newDuration - layerToChange.inPoint);
+						layerToChange.outPoint = compToChange[i].duration;
+					}
 				}
 			}
 		}
@@ -63,10 +68,6 @@ chTiming.changeTiming = function(_time, _sel){
 
 
 	if(app.project.activeItem){ //if we are in a comp
-		$.writeln(app.project.activeItem.selectedLayers)
-		//if(app.project.activeItem.selectedLayers){
-		//	_time = app.project.activeItem.selectedLayers[0].duration
-		//}
 		var comps = [app.project.activeItem];
 	}
 	else if(selComps.length>0){
