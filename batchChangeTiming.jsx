@@ -10,7 +10,8 @@
 
 
 var chTiming = this;
-this.version = 0.3;
+chTiming.version = 0.3;
+chTiming.scriptTitle = "Batch Timing Changer";
 
 chTiming.run = function(){
     this.buildGUI(this);
