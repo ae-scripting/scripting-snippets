@@ -20,10 +20,9 @@ chTiming.run = function(){
 chTiming.buildGUI = function(thisObj){
 	thisObj.w = (thisObj instanceof Panel) ? thisObj : new Window("palette", thisObj.scriptTitle, undefined, {resizeable:true});
 	thisObj.w.alignChildren = ['left', 'top']
-	thisObj.w.add("staticText", undefined, "Batch Timing Changer "+thisObj.version);
 	var g = thisObj.w.add("group{orientation:'row', alignChildren: ['left', 'top']}");
 	var timeText = g.add("editText", undefined, "0");
-	timeText.size = [40, 20];
+	timeText.size = [40, 25];
 	var modeselect = g.add("dropdownlist", undefined, ["s", "fr"]);
 	modeselect.selection = 0;
 
@@ -65,8 +64,7 @@ chTiming.changeTiming = function(_time, _sel){
     
 	var selComps = app.project.selection;
 
-
-	if(app.project.activeItem){ //if we are in a comp
+	if(app.project.activeItem && app.project.activeItem instanceof CompItem){ //if we are in a comp
 		var comps = [app.project.activeItem];
 	}
 	else if(selComps.length>0){

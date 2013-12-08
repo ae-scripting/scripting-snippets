@@ -10,20 +10,19 @@ newNull.go = function(){
 
 	if(activeComp && activeComp instanceof CompItem){ 
 		var sel = activeComp.selectedLayers;
-		if(sel){
-		app.beginUndoGroup("Create smart null"); 
-		sel.sort(function(a,b){
-			return a.index - b.index;
-		});
 		var nullLayer = activeComp.layers.addNull();
-		nullLayer.moveBefore(sel[0]);
-		nullLayer.startTime = sel[0].startTime;
-		nullLayer.outPoint = sel[0].outPoint;
-		nullLayer.label = sel[0].label;
-		
-		app.endUndoGroup();
+		if(sel){
+			app.beginUndoGroup("Create smart null"); 
+			sel.sort(function(a,b){
+				return a.index - b.index;
+			});
+			
+			nullLayer.moveBefore(sel[0]);
+			nullLayer.startTime = sel[0].startTime;
+			nullLayer.outPoint = sel[0].outPoint;
+			nullLayer.label = sel[0].label;
+			app.endUndoGroup();
 		}
-
 	}
 }
 
