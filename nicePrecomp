@@ -1,0 +1,30 @@
+//Snippet for new trimmed null creation
+//creates a null trimmed to the highest selected layer
+//inherits its color
+//CC-BY-SA Nik Ska, 2013
+
+var nicePrecomp = {}
+
+nicePrecomp.go = function(){
+
+	function getTimes(_sel){
+		var begin = 0;
+		var end = 0;
+		for(var b = 0; b < _sel.lenght; b++){
+			if(_sel[b].inPoint>begin) begin = _sel[b].inPoint;
+			if(_sel[b].outPoint>end) end = _sel[b].outPoint;
+		}
+		return([begin, end])
+	}
+
+	var activeComp = app.project.activeItem; //открытая композиция
+	if(activeComp && activeComp instanceof CompItem){ //если это все же композиция 
+		var sel = activeComp.selectedLayers; //выбранные слои
+		app.beginUndoGroup("Nice Precomp"); //начинаем Undo
+		if(sel){ //если что-то выбрано
+			$.writeln(getTimes(sel))
+		}
+		app.endUndoGroup(); //закрываем Undo
+	}
+}
+nicePrecomp.go() //поехали!
