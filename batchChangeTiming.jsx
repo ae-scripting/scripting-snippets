@@ -5,12 +5,13 @@
 //0.1 - initial release
 //0.2 - code cleanup, true recursive function
 //0.3 - minor update
+//0.31 - fixed improper behavior with shorter than comp layers
 
 //CC-BY, Nik Ska, 2013
 
 
 var chTiming = this;
-chTiming.version = 0.3;
+chTiming.version = 0.31;
 chTiming.scriptTitle = "Batch Timing Changer";
 
 chTiming.run = function(){
@@ -41,24 +42,24 @@ chTiming.changeTiming = function(_time, _sel){
     function loopthrough(compToChange, _newDuration){
     	//first - loop through compositions
     	for(var i = 0; i<compToChange.length; i++){
-			//if we work with frames - update time value
-			compToChange[i].duration = _newDuration;
 			//now loop through comp's layers
 			for(var k = 1; k<=compToChange[i].layers.length; k++){
 				var layerToChange = compToChange[i].layers[k];
 
-				if(compToChange[i].duration>layerToChange.inPoint){
-					layerToChange.outPoint = compToChange[i].duration;
+                $.writeln(layerToChange.outPoint, ' ', compToChange[i].duration)
+				if(_newDuration>layerToChange.inPoint && layerToChange.outPoint>=compToChange[i].duration){
+					layerToChange.outPoint = _newDuration;
 				}
 
 				if(layerToChange.source instanceof CompItem){
 					//if the layer we stumble upon is a comp - go deeper
-					if(compToChange[i].duration>layerToChange.inPoint){
+					if(_newDuration>layerToChange.inPoint){
 						loopthrough([layerToChange.source], _newDuration-layerToChange.inPoint);
 						layerToChange.outPoint = _newDuration;
 					}
 				}
 			}
+			compToChange[i].duration = _newDuration;
 		}
     }
     
