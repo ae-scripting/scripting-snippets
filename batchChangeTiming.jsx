@@ -45,15 +45,11 @@ chTiming.changeTiming = function(_time, _sel){
 			//now loop through comp's layers
 			for(var k = 1; k<=compToChange[i].layers.length; k++){
 				var layerToChange = compToChange[i].layers[k];
-
-                $.writeln(layerToChange.outPoint, ' ', compToChange[i].duration)
 				if(_newDuration>layerToChange.inPoint && layerToChange.outPoint>=compToChange[i].duration){
 					layerToChange.outPoint = _newDuration;
-				}
-
-				if(layerToChange.source instanceof CompItem){
-					//if the layer we stumble upon is a comp - go deeper
-					if(_newDuration>layerToChange.inPoint){
+				
+					if(layerToChange.source instanceof CompItem){
+						//if the layer we stumble upon is a comp - go deeper
 						loopthrough([layerToChange.source], _newDuration-layerToChange.inPoint);
 						layerToChange.outPoint = _newDuration;
 					}
