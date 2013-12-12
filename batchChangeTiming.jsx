@@ -39,7 +39,7 @@ chTiming.buildGUI = function(thisObj){
 }
 
 chTiming.changeTiming = function(_time, _sel){
-    function loopthrough(compToChange, _newDuration){
+	function loopthrough(compToChange, _newDuration){
     	//first - loop through compositions
     	for(var i = 0; i<compToChange.length; i++){
 			//now loop through comp's layers
@@ -61,7 +61,8 @@ chTiming.changeTiming = function(_time, _sel){
     
 	var selComps = app.project.selection;
 
-	if(app.project.activeItem && app.project.activeItem instanceof CompItem){ //if we are in a comp
+	if(app.project.activeItem && app.project.activeItem instanceof CompItem){
+	//if we are in a comp
 		var comps = [app.project.activeItem];
 	}
 	else if(selComps.length>0){
