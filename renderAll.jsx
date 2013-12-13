@@ -7,12 +7,18 @@ var renderAll = this;
 
 renderAll.go = function(){
 
+    //получаем активный элемент и все выбранные элементы
     var activeComp = app.project.activeItem;
     var selComps = app.project.selection;
 
+    //получаем текущую дату для именования папки с рендером
+    //можно удалить если не надо
+    //тогда в строчке var fldr .... надо будет удалить "+_date + '/'"
     var d = new Date();
     var _date = d.getDate()+'_'+(d.getMonth()+1)+'_'+d.getFullYear();
 
+    //если в папке проекта нет папки render - создаем ее
+    //можно назвать как угодно, не только render
     var fldr = new Folder(app.project.file.path + '/render_' + _date + '/');
     fldr.create();
 
