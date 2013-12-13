@@ -28,7 +28,7 @@ renderAll.go = function(){
 
     for(var c = 0; c<comps.length; c++){
         //сразу добавляем композицию на рендер
-        toRenderQueue(comps[c], t1);
+        toRenderQueue(comps[c], t1, fldr);
 
         //создаем DV-версию
         var dvComp = app.project.items.addComp(comps[c].name + '_DV', 720, 576, 1.09, activeComp.duration, 25);
@@ -41,17 +41,18 @@ renderAll.go = function(){
         l.property("ADBE Transform Group").property("ADBE Scale").setValue(dvComp.pixelAspect*l.property("ADBE Transform Group").property("ADBE Scale").value/(comps[c].width/dvComp.width));
 
         //закидываем на рендер с настройкой t2
-        toRenderQueue(dvComp, t2);
+        toRenderQueue(dvComp, t2, fldr);
     }
 
     app.endUndoGroup();
 }
 
-renderAll.toRenderQueue = function(_comp, _template){
+renderAll.toRenderQueue = function(_comp, _template, _fldr){
     var rQ = app.project.renderQueue; 
-    var renderit = rQ.items.add(_comp); 
+    var renderit = rQ.items.add(_comp);
+    renderit.outputModules[1].file = File(_fldr.fullName+"/"+_comp.name);
     renderit.outputModules[1].applyTemplate(_template);
-    renderit.outputModules[1].file = File(fldr.fullName+"/"+_comp.name)
+    
 }
 
 renderAll.go()
