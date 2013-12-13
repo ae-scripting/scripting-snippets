@@ -1,4 +1,5 @@
-var t1 = "h264";  //шаблоны
+//Вот тут задаём шаблоны
+var t1 = "h264";  
 var t2 = "jpg"; 
 var t3 = "qt_animation";
 
@@ -31,6 +32,7 @@ renderAll.go = function(){
         toRenderQueue(comps[c], t1, fldr);
 
         //создаем DV-версию
+        //этот блок можно удалить, если это не нужно.
         var dvComp = app.project.items.addComp(comps[c].name + '_DV', 720, 576, 1.09, activeComp.duration, 25);
 
         //докидываем солид
@@ -38,6 +40,7 @@ renderAll.go = function(){
 
         //докидываем слой с исходной композицией
         var l = dvComp.layers.add(comps[c]);
+        //корректируем scale
         l.property("ADBE Transform Group").property("ADBE Scale").setValue(dvComp.pixelAspect*l.property("ADBE Transform Group").property("ADBE Scale").value/(comps[c].width/dvComp.width));
 
         //закидываем на рендер с настройкой t2
@@ -48,6 +51,8 @@ renderAll.go = function(){
 }
 
 renderAll.toRenderQueue = function(_comp, _template, _fldr){
+    //функция берет композицию _comp, кидает ее на рендер
+    //с шаблоном _template и кладет рендер в папку _fldr
     var rQ = app.project.renderQueue; 
     var renderit = rQ.items.add(_comp);
     renderit.outputModules[1].file = File(_fldr.fullName+"/"+_comp.name);
