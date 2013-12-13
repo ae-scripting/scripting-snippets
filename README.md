@@ -1,1 +1,1 @@
-#These are soem snippets
+#These are some snippets
