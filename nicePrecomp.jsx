@@ -1,4 +1,9 @@
 ﻿//Experiment to make nice and clean precomps
+//Works for AE prior to CC, where "adjust precomp to layers"
+//is introduced
+
+//Just precomp your layer, then run this script and it will recursively 
+//adjust its ins and outs to its comtents.
 
 //CC-BY-SA Nik Ska, 2013
 
@@ -6,32 +11,32 @@ var precompFixer = {}
 
 precompFixer.go = function(){
 	function getTimes(_sel){
-		var end = 0; //ищем конец последнего слоя
+		var end = 0; //look for the last outpoint
 		for(var e = 1; e <= _sel.length; e++){
 			if(_sel[e].outPoint>end) end = _sel[e].outPoint;
 		}
-		var begin = end; //ищем начало первого слоя
+		var begin = end; //look for the first inpoint
 		for(var b = 1; b <= _sel.length; b++){
 			if(_sel[b].inPoint<begin) begin = _sel[b].inPoint;
 		}
 		return([begin, end])
 	}
 
-	var activeComp = app.project.activeItem; //открытая композиция
-	if(activeComp && activeComp instanceof CompItem){ //если это все же композиция 
-		var sel = activeComp.selectedLayers; //выбранные слои
-		app.beginUndoGroup("Nice Precomp"); //начинаем Undo
-		if(sel.length == 1 && sel[0].source instanceof CompItem){ //если мы выбрали прекомп
-			var precomp = sel[0].source; //берем сам прекомп
-			var timings = getTimes(precomp.layers); //рассчитываем начало и конец
-			precomp.duration = timings[1]-timings[0]; //рассчитываем новую длину
-			precomp.displayStartTime = timings[0]; //сдвигаем Display Start Time
-			sel[0].startTime+=timings[0]; //сдвигаем сам прекомп
+	var activeComp = app.project.activeItem; //active item
+	if(activeComp && activeComp instanceof CompItem){ //if it's a comp 
+		var sel = activeComp.selectedLayers; //selected layers
+		app.beginUndoGroup("Nice Precomp"); //Undo
+		if(sel.length == 1 && sel[0].source instanceof CompItem){ //if we have comp selected
+			var precomp = sel[0].source; //use it
+			var timings = getTimes(precomp.layers); //calculate it's layers' ins and outs
+			precomp.duration = timings[1]-timings[0]; //new duration
+			precomp.displayStartTime = timings[0]; //shift Display Start Time
+			sel[0].startTime+=timings[0]; //shift precomp
 			for(var l = 1 ; l <= precomp.layers.length ; l++){
-				precomp.layers[l].startTime -= timings[0]; //сдвигаем слои внутри
+				precomp.layers[l].startTime -= timings[0]; //shift precomp layers
 			}
 		}
-		app.endUndoGroup(); //закрываем Undo
+		app.endUndoGroup(); //close Undo
 	}
 }
-precompFixer.go() //поехали!
+precompFixer.go()

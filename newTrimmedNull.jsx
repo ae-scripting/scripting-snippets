@@ -6,22 +6,22 @@
 var newNull = {}
 
 newNull.go = function(){
-	var activeComp = app.project.activeItem; //открытая композиция
-	if(activeComp && activeComp instanceof CompItem){ //если это все же композиция 
-		var sel = activeComp.selectedLayers; //выбранные слои
-		app.beginUndoGroup("Create smart null"); //начинаем Undo
-		var nullLayer = activeComp.layers.addNull(); //добавляем нуль
-		if(sel){ //если что-то выбрано
-			sel.sort(function(a,b){ //Хитрая сортировка на JS
+	var activeComp = app.project.activeItem; //active item
+	if(activeComp && activeComp instanceof CompItem){ //if it's a comp 
+		var sel = activeComp.selectedLayers; //selected layers
+		app.beginUndoGroup("Create smart null"); //Undo
+		var nullLayer = activeComp.layers.addNull(); //adding Null
+		if(sel){ //if anything is selected
+			sel.sort(function(a,b){ //sort by index
 				return a.index - b.index;
 			});
-			nullLayer.moveBefore(sel[0]); //перемещаем перед первым выбранным
-			nullLayer.startTime = sel[0].startTime; //подрезаем
+			nullLayer.moveBefore(sel[0]); //placing before the 1st
+			nullLayer.startTime = sel[0].startTime; //trim
 			nullLayer.inPoint = sel[0].inPoint;
 			nullLayer.outPoint = sel[0].outPoint;
-			nullLayer.label = sel[0].label; //наследуем цвет
+			nullLayer.label = sel[0].label; //inherit color
 		}
-		app.endUndoGroup(); //закрываем Undo
+		app.endUndoGroup(); //closing undo
 	}
 }
-newNull.go() //поехали!
+newNull.go()
