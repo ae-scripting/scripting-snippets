@@ -1,4 +1,4 @@
-//Script for creating DV version of active or se;ected comps
+﻿//Script for creating new version of active or se;ected comps
 //and rendering them with preset templates
 //to the "render" subfolder of a project folder
 
@@ -21,7 +21,10 @@ renderAll.go = function(){
     var _date = d.getDate()+'_'+(d.getMonth()+1)+'_'+d.getFullYear();
 
     //creating "render" folder
-    var fldr = new Folder(app.project.file.path + '/render_' + _date + '/');
+    //var fldr = new Folder(app.project.file.path + '/render_' + _date + '/');
+    //fldr.create();
+
+    var fldr = new Folder(app.project.file.path + '/proxies/');
     fldr.create();
 
     var comps;
@@ -37,12 +40,12 @@ renderAll.go = function(){
 
     for(var c = 0; c<comps.length; c++){
         //put the comp into the render queue
-        toRenderQueue(comps[c], t1, fldr);
+        //toRenderQueue(comps[c], t1, fldr);
 
         //creating DV version
         //not mandatory
-        var dvComp = app.project.items.addComp(comps[c].name + '_DV', 720, 576, 1.09, activeComp.duration, 25);
-        dvComp.layers.addSolid([0,0,0], "Black Solid", dvComp.width, dvComp.height, dvComp.pixelAspect, dvComp.duration);
+        var dvComp = app.project.items.addComp(comps[c].name + '_proxy', 1920, 1080, 1, comps[c].duration, 30);
+        //dvComp.layers.addSolid([0,0,0], "Black Solid", dvComp.width, dvComp.height, dvComp.pixelAspect, dvComp.duration);
 
         //adding initial comp as layer
         var l = dvComp.layers.add(comps[c]);
@@ -50,7 +53,7 @@ renderAll.go = function(){
         l.property("ADBE Transform Group").property("ADBE Scale").setValue(dvComp.pixelAspect*l.property("ADBE Transform Group").property("ADBE Scale").value/(comps[c].width/dvComp.width));
 
         //put it into render queue with t2 template
-        toRenderQueue(dvComp, t2, fldr);
+        toRenderQueue(dvComp, t1, fldr);
     }
 
     app.endUndoGroup();
