@@ -7,13 +7,6 @@
 	return null;
 }
 
-function findLayerByName(_name, _comp){
-	for(var l = 1; l <= _comp.layers.length; l++){
-		if(_comp.layers[l].name == _name) return _comp.layers[l];
-	}
-	return null;
-}
-
 function findEffectByName(_name, _layer){
 	//looks for an effect with given name inside given layer
 	var eff = _layer.property("ADBE Effect Parade");
@@ -22,7 +15,6 @@ function findEffectByName(_name, _layer){
 	}
 	return null;
 }
-
 
 function getFolder(_name){
 	//function for gettin a specific folder
@@ -67,9 +59,9 @@ if (textFile != null) {
 		newComp.parentFolder = targetFolder;
 
 		//accessing variables
-		var nameText = findLayerByName("name", newComp).property("ADBE Text Properties").property("ADBE Text Document");
-		var regionText = findLayerByName("region", newComp).property("ADBE Text Properties").property("ADBE Text Document");
-		var numberValue = findEffectByName("amount", findLayerByName("number", newComp)).property("ADBE Slider Control-0001");
+		var nameText = newComp.layer("name").property("ADBE Text Properties").property("ADBE Text Document");
+		var regionText = newComp.layer("region").property("ADBE Text Properties").property("ADBE Text Document");
+		var numberValue = findEffectByName("amount", newComp.layer("number")).property("ADBE Slider Control-0001");
 
 		//setting variables
 		nameText.setValue(line[0]);
