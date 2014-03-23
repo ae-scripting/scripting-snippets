@@ -1,5 +1,6 @@
 //Snippet for converting a pack of nulls into one
 //each null represents a frame
+//Just select nulls in the right order and run the script
 
 //CC-BY Nik Ska, 2014
 
@@ -21,6 +22,8 @@ if(activeComp && activeComp instanceof CompItem){
             newTrackNull.property("ADBE Transform Group").property("ADBE Anchor Point").setValueAtTime(t, currentNull.property("ADBE Transform Group").property("ADBE Anchor Point").value);
 
             newTrackNull.property("ADBE Transform Group").property("ADBE Rotate Z").setValueAtTime(t, currentNull.property("ADBE Transform Group").property("ADBE Rotate Z").value);
+
+            newTrackNull.property("ADBE Transform Group").property("ADBE Scale").setValueAtTime(t, currentNull.property("ADBE Transform Group").property("ADBE Scale").value);
 
             if(sel[s].threeDLayer){
                 newTrackNull.property("ADBE Transform Group").property("ADBE Rotate X").setValueAtTime(t, currentNull.property("ADBE Transform Group").property("ADBE Rotate X").value);
