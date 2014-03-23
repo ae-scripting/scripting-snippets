@@ -29,26 +29,26 @@ parseBoujou.go = function(){
 			app.beginUndoGroup("Parse Boujou");
 
 			//regex to match X/Y and null name
-		    var XYmatch = /(\d+([\.]\d+)?)/g;
-		    var nameMatch = /auto_(\d+)/;
+			var XYmatch = /(\d+([\.]\d+)?)/g;
+			var nameMatch = /auto_(\d+)/;
 
-		    for(var t = 1; t<textLines.length; t++){
-		    	if(t>5){
-		    		var parsed = textLines[t].match(XYmatch);
-		    		var nullNum = textLines[t].match(nameMatch)[1];
-		    		//check for existing null
-		    		var curNull = activeComp.layer("Boujou Null_"+nullNum);
-		    		//create one if there is no null
-		    		if(!curNull) curNull = createNull(activeComp, nullNum);
+			for(var t = 1; t<textLines.length; t++){
+				if(t>5){ //boujou file header is 5 lines long
+					var parsed = textLines[t].match(XYmatch);
+					var nullNum = textLines[t].match(nameMatch)[1];
+					//check for existing null
+					var curNull = activeComp.layer("Boujou Null_"+nullNum);
+					//create one if there is no null
+					if(!curNull) curNull = createNull(activeComp, nullNum);
 
-		    		if(parsed){
-		    			// $.writeln(textLines[t].match(XYmatch))
-		    			// $.writeln(Number(parsed[2]), ", ", Number(parsed[3]));;
+					if(parsed){
+						// $.writeln(textLines[t].match(XYmatch))
+						// $.writeln(Number(parsed[2]), ", ", Number(parsed[3]));;
 
-		    			curNull.property("ADBE Transform Group").property("ADBE Position").setValueAtTime(Number(parsed[1]-1)*activeComp.frameDuration, [Number(parsed[2]), Number(parsed[3]),0]);
-		    		}
-		    	}
-		    }
+						curNull.property("ADBE Transform Group").property("ADBE Position").setValueAtTime(Number(parsed[1]-1)*activeComp.frameDuration, [Number(parsed[2]), Number(parsed[3]),0]);
+					}
+				}
+			}
 
 
 		}
