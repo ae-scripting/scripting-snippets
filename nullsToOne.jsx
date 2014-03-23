@@ -12,6 +12,7 @@ if(activeComp && activeComp instanceof CompItem){
         var newTrackNull = activeComp.layers.addNull();
         newTrackNull.name = "MasterNull";
         newTrackNull.threeDLayer = true;
+        newTrackNull.label = 10;
 
         for(var s = 0; s < sel.length; s++){
             t = s*activeComp.frameDuration; //time
@@ -26,6 +27,7 @@ if(activeComp && activeComp instanceof CompItem){
             newTrackNull.property("ADBE Transform Group").property("ADBE Scale").setValueAtTime(t, currentNull.property("ADBE Transform Group").property("ADBE Scale").value);
 
             if(sel[s].threeDLayer){
+                //for 3D layers also copy orientation and X/Y rotations
                 newTrackNull.property("ADBE Transform Group").property("ADBE Rotate X").setValueAtTime(t, currentNull.property("ADBE Transform Group").property("ADBE Rotate X").value);
 
                 newTrackNull.property("ADBE Transform Group").property("ADBE Rotate Y").setValueAtTime(t, currentNull.property("ADBE Transform Group").property("ADBE Rotate Y").value);
