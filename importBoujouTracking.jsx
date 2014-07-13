@@ -28,13 +28,14 @@ parseBoujou.go = function(){
 		if(activeComp && activeComp instanceof CompItem){
 			app.beginUndoGroup("Parse Boujou");
 
-			//regex to match X/Y and null name
-			var XYmatch = /(\d+([\.]\d+)?)/g;
-			var nameMatch = /auto_(\d+)/;
+			//regex to break line into segments
+			//null number / frame number / X / Y
+			var lineMatch = /(\S+(\s || $))/g;
+			var namelineMatch = /(\d+)/;
 
 			for(var t = 1; t<textLines.length; t++){
 				if(t>5){ //boujou file header is 5 lines long
-					var parsed = textLines[t].match(XYmatch);
+					var parsed = textLines[t].match(lineMatch);
 					var nullNum = textLines[t].match(nameMatch)[1];
 					//check for existing null
 					var curNull = activeComp.layer("Boujou Null_"+nullNum);
@@ -49,10 +50,7 @@ parseBoujou.go = function(){
 					}
 				}
 			}
-
-
 		}
-
 		app.endUndoGroup();
 	}
 }
