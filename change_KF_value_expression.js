@@ -1,23 +1,23 @@
-//Экспрешн, которые позволяет менять значение одного кейфрейма, с сохранением кривых анимации. Править первые две строчки
+//Экспрешн, который позволяет менять значение одного кейфрейма, с сохранением кривых анимации. Править первые две строчки
 
 myKfNum = 3;//номер кейфрема
 myKfNewValue = 180;//новое значение для этого кейфрейма
 
 Array.prototype.linear = function(tMin,tMax,val1,val2)
 {
-if(arguments.length<4)
-	return this;
-for(var i=0;i<arguments.length;i++)
-	if(!arguments[i] instanceof Array)
+	if(arguments.length<4)
 		return this;
+	for(var i=0;i<arguments.length;i++)
+		if(!arguments[i] instanceof Array)
+			return this;
 
-var newVal = [];
-for(var k=0;k<this.length;k++)
-	if(tMin[k]<=tMax[k])
-		newVal[k] = linear(this[k],tMin[k],tMax[k],val1[k],val2[k]);
-	else
-		newVal[k] = linear(this[k],tMin[k],tMax[k],val2[k],val1[k]);
-return newVal;
+	var newVal = [];
+	for(var k=0;k<this.length;k++)
+		if(tMin[k]<=tMax[k])
+			newVal[k] = linear(this[k],tMin[k],tMax[k],val1[k],val2[k]);
+		else
+			newVal[k] = linear(this[k],tMin[k],tMax[k],val2[k],val1[k]);
+	return newVal;
 }
 
 myKfOldValue = key(myKfNum).value//старое значение маркера
