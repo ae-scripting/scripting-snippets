@@ -1,5 +1,5 @@
-//Just a little function to get the property parent layer
-//Nik Ska
+//Snippet to get the property parent layer
+//Nik Ska, 2013
 
 function getParentLayer(_property){
     //recursively gets the parent layer

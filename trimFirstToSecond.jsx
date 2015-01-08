@@ -1,4 +1,4 @@
-//Trim First Selected layer to the second
+//Trim First Selected layer to the second one
 //CC-BY-SA Nik Ska, 2013
 
 var ns_Trim = {}

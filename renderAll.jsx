@@ -1,4 +1,4 @@
-﻿//Script for creating new version of active or se;ected comps
+﻿//Script for creating new version of active or selected comps
 //and rendering them with preset templates
 //to the "render" subfolder of a project folder
 

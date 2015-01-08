@@ -1,4 +1,4 @@
-//Script drops every Nth frame starting from the defined frame
+//Script drops every Nth frame starting from a given frame
 
 var activeItem = app.project.activeItem;
 if(activeItem != null && activeItem instanceof CompItem){
