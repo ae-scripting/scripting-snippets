@@ -17,7 +17,7 @@ The main purpose of the repository is education, so you are free to use these sc
 +	[dropNthFrame.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/dropNthFrame.jsx) – drops every Nth frame starting from a given
 +	[enableDisableExpression.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/enableDisableExpression.jsx) – enables, disables or removes all expressions on selected layers
 +	[filterInput.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/filterInput.jsx) – snippet to filter edittext input to only numbers
-+ 	getPropertyParent – snippet to get the property parent layer
++ 	[getPropertyParent.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/getPropertyParent.jsx) – snippet to get the property parent layer
 +	[guiTemplate.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/guiTemplate.jsx) – just a template for GUI
 +	[importBoujouTracking.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/importBoujouTracking.jsx) – imports Boujou 2d tracks to AE
 +	[makeClosest16.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/makeClosest16.jsx) – script for making comp size divisible by 16
