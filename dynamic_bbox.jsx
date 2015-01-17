@@ -1,4 +1,6 @@
-﻿//скрипт, создающий динамическую плашку вокруг текстового или шейпового слоя, с контролами
+﻿//Script draws dynamic rectangle shape around text or any object
+//Only for AE 13.2 and higher
+//Alex Kravchenko, 2015
 
 CompItem.prototype.dd_dynamicBbox_createBbox = function(_layer)
 {
