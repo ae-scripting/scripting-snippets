@@ -1,11 +1,13 @@
 //ReverseKeys just does what it says is does - reverses keyframes
 //Just select a bunch of keyframes and the script will reverse them at the playhead
 
+//v0.1 - 25.05.2015
+
 //CC-BY, Nik Ska, 2015
 
-var reverseKeys = this;
+keyReverse = this;
 
-reverseKeys.go = function() {
+keyReverse.go = function() {
     var activeComp = app.project.activeItem;
     if(activeComp && activeComp instanceof CompItem){
         var sel = activeComp.selectedLayers;
@@ -60,5 +62,5 @@ reverseKeys.go = function() {
     }
 }
 
-reverseKeys.go();
+keyReverse.go();
 
