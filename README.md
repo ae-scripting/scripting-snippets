@@ -29,6 +29,7 @@ The main purpose of the repository is education, so you are free to use these sc
 +	[nullsToOne.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/nullsToOne.jsx) – snippet for converting a pack of nulls into one
 +	[openProjectFolder.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/openProjectFolder.jsx) – Opens Project Folder
 +	[precompSelected.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/precompSelected.jsx) – snippet to precomp all selected layers into separate comps
++	[prop2null.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/prop2null.jsx) – adds parented Null for each selected spatial property (like Corner Pin / Page Turn / Position)
 +	[renderAll.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/renderAll.jsx) – Script for creating new version of active or selected comps and rendering them with preset templates to the "render" subfolder of a project folder
 +	[setBounceExpression.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/setBounceExpression.jsx) – This script is used to set a classic bounce expression to the selected property and link it to slider controls
 +	[separateBrushes.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/separateBrushes.jsx) – snippet to separate brushes into different layers
