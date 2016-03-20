@@ -23,6 +23,7 @@ The main purpose of the repository is education, so you are free to use these sc
 +	[importBoujouTracking.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/importBoujouTracking.jsx) – imports Boujou 2d tracks to AE
 +	[keyReverse.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/keyReverse.jsx) – reverses keyframes at playhead (similar to Adobe Edge)
 +	[makeClosest16.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/makeClosest16.jsx) – script for making comp size divisible by 16
++	[makeAllStrokesRound.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/makeAllStrokesRound.jsx) – Sets Line Cap and Line Join to Round for every stroke in selected Shape Layers.
 +	[newAdjust.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/newAdjust.jsx) – snippet that lets you name the new Adjustment Layer before it's created
 +	[newTrimmedNull.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/newTrimmedNull.jsx) – creates a null trimmed to the highest selected layer
 +	[nicePrecomp.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/nicePrecomp.jsx) – Experiment to make nice and clean precomps. Works for AE prior to CC, where "adjust precomp to layers"
@@ -33,6 +34,7 @@ The main purpose of the repository is education, so you are free to use these sc
 +	[renderAll.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/renderAll.jsx) – Script for creating new version of active or selected comps and rendering them with preset templates to the "render" subfolder of a project folder
 +	[setBounceExpression.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/setBounceExpression.jsx) – This script is used to set a classic bounce expression to the selected property and link it to slider controls
 +	[separateBrushes.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/separateBrushes.jsx) – snippet to separate brushes into different layers
++	[selectRandomLayers.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/selectRandomLayers.jsx) – Randomizes current selection.
 +	[setColor.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/setColor.jsx) – *I think it is used to set selected color to one of predefined colors*
 +	[setExpressionToPaths.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/setExpressionToPaths.jsx) – sets one expression to all paths
 +	[setKeysForPaths.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/setKeysForPaths.jsx) – sets keyframe for all paths in a shape layer
