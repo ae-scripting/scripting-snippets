@@ -5,6 +5,9 @@ This repo has been built over the years as the result of working on [vk.com comm
 The main purpose of the repository is education, so you are free to use these scripts in any way you see fit.
 *Some of these scripts are unfinished or may work not as expected.* 
 
+All scripts are released under Creative Commons CC-BY 3.0 License
+which generally means, do whatever you want (this includes using these tools for you commercial projects and including them in your own scripts) until you mention the author.
+
 ### Contents
 
 +	[addRoundedShape.jsx](https://github.com/ae-scripting/scripting-snippets/blob/master/addRoundedShape.jsx) – Just adds a blank shape object with rounded Line Cap and Line Join
