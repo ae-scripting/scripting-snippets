@@ -2,7 +2,8 @@
 //CC-BY, Nik Ska, 2016
 
 var makeCompSize = this;
-makeCompSize.go = function(){
+makeCompSize.go = function(reset){
+    reset = false || reset;
     var activeComp = app.project.activeItem;
     if (activeComp && activeComp instanceof CompItem) {
 
@@ -14,6 +15,12 @@ makeCompSize.go = function(){
                     try{
                         sel[s].source.width = activeComp.width;
                         sel[s].source.height = activeComp.height;
+                        if(reset){
+                            sel[s].property("ADBE Transform Group").property("ADBE Position").setValue([activeComp.width, activeComp.height]/2);
+                            sel[s].property("ADBE Transform Group").property("ADBE Anchor Point").setValue([activeComp.width, activeComp.height]/2);
+                            sel[s].property("ADBE Transform Group").property("ADBE Scale").setValue([100,100]);
+                            sel[s].property("ADBE Transform Group").property("ADBE Rotate Z").setValue(0);
+                        }
                     }
                     catch(err){
                         null;
@@ -25,4 +32,4 @@ makeCompSize.go = function(){
     }
 }
 
-makeCompSize.go(); 
+makeCompSize.go(true); 
