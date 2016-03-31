@@ -3,6 +3,7 @@
 
 var makeCompSize = this;
 makeCompSize.go = function(reset){
+    
     reset = false || reset;
     var activeComp = app.project.activeItem;
     if (activeComp && activeComp instanceof CompItem) {
