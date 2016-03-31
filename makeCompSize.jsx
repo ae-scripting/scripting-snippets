@@ -1,3 +1,6 @@
+//Sets selected Solids and Adjustment Layers size to comp size
+//CC-BY, Nik Ska, 2016
+
 var makeCompSize = this;
 makeCompSize.go = function(){
     var activeComp = app.project.activeItem;
