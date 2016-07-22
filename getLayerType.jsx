@@ -1,3 +1,7 @@
+//expressions function
+//returns type of a layer
+//does not see a difference between null, solid, image and adjustmnt layer
+
 function getLayerType(layer)
 	{
 		try
@@ -45,7 +49,13 @@ function getLayerType(layer)
 									}
 								catch(e)
 									{
-										return "Unknown";
+										try
+											{
+												layer("ADBE Root Vectors Group");
+												return "Shape";
+											}
+										catch(e)
+											{return "Unknown";}
 									}
 							}
 					}
