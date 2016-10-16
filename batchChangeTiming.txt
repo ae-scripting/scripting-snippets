@@ -1,0 +1,14 @@
+PluginName = Batch Change Timing
+PluginVersion = 1.0.0
+TrialURL = http://aescripts.com/
+PrivNum = 267219
+SupportURL = http://aescripts.com/contact
+TrialDays = 5
+EnableOnNoSelection = 1
+EnableOnFolderSelection = 1
+EnableOnCompSelection = 1
+EnableOnFootageSelection = 1
+Menu = 6
+MenuPosition = 5
+BetaMode = 1
+BetaExpiration = 2016/16/09
