@@ -26,11 +26,11 @@ CompItem.prototype.dd_dynamicBbox_createBbox = function(_layer)
 	var cbControlName = "ADBE Checkbox Control";
 
 	//expressions:
-	var shapeSizeExpression = "textLayer = effect(\"target layer\")(\"Layer\");\nvar strokes = effect(\"accept strokes\")(\"Checkbox\");\nvar add = effect(\"add space\")(\"Slider\");\nbbox = textLayer.sourceRectAtTime(time,strokes);//bounding box вокруг текста\n[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]+[add,add]//ширина bbox'а плюс немного отступа по краям";
-	var textSizeExpression = "textLayer = effect(\"target layer\")(\"Layer\");\nvar add = effect(\"add space\")(\"Slider\");\nbbox = textLayer.sourceRectAtTime(time,false);//bounding box вокруг текста\n[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]+[add,add]//ширина bbox'а плюс немного отступа по краям";
+	var shapeSizeExpression = "textLayer = effect(\"Target Layer\")(\"Layer\");\nvar strokes = effect(\"Accept Strokes\")(\"Checkbox\");\nvar add = effect(\"Padding\")(\"Slider\");\nbbox = textLayer.sourceRectAtTime(time,strokes);//bounding box вокруг текста\n[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]+[add,add]//ширина bbox'а плюс немного отступа по краям";
+	var textSizeExpression = "textLayer = effect(\"Target Layer\")(\"Layer\");\nvar add = effect(\"Padding\")(\"Slider\");\nbbox = textLayer.sourceRectAtTime(time,false);//bounding box вокруг текста\n[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]+[add,add]//ширина bbox'а плюс немного отступа по краям";
 	
-	var shapePosExpression = "textLayer = effect(\"target layer\")(\"Layer\");\nvar strokes = effect(\"accept strokes\")(\"Checkbox\");\nbbox = textLayer.sourceRectAtTime(time,strokes);\ntextLayer.position-textLayer.anchorPoint+\n	[bbox.left*textLayer.scale[0]/100,bbox.top*textLayer.scale[1]/100]+\n	[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]/2;";
-	var textPosExpression = "textLayer = effect(\"target layer\")(\"Layer\");\nbbox = textLayer.sourceRectAtTime(time,false);\ntextLayer.position-textLayer.anchorPoint+\n	[bbox.left*textLayer.scale[0]/100,bbox.top*textLayer.scale[1]/100]+\n	[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]/2;";
+	var shapePosExpression = "textLayer = effect(\"Target Layer\")(\"Layer\");\nvar strokes = effect(\"Accept Strokes\")(\"Checkbox\");\nbbox = textLayer.sourceRectAtTime(time,strokes);\ntextLayer.position-textLayer.anchorPoint+\n	[bbox.left*textLayer.scale[0]/100,bbox.top*textLayer.scale[1]/100]+\n	[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]/2;";
+	var textPosExpression = "textLayer = effect(\"Target Layer\")(\"Layer\");\nbbox = textLayer.sourceRectAtTime(time,false);\ntextLayer.position-textLayer.anchorPoint+\n	[bbox.left*textLayer.scale[0]/100,bbox.top*textLayer.scale[1]/100]+\n	[bbox.width*textLayer.scale[0]/100,bbox.height*textLayer.scale[1]/100]/2;";
 
 	//creating shape layer
 	var newShape = this.layers.addShape();
