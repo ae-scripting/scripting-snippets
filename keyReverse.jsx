@@ -34,16 +34,22 @@ keyReverse.go = function() {
                                 var newKeyIndex = thisProperty.addKey(newKeyTime);
 
                                 //getting spatial and temporal ease values
-                                var newKeyInSpatialTangent = thisProperty.keyInSpatialTangent(keys[keys.length - k - 1]);
-                                var newKeyOutSpatialTangent = thisProperty.keyOutSpatialTangent(keys[keys.length - k - 1]);
+                                if ((thisProperty.propertyValueType == PropertyValueType.TwoD_SPATIAL) 
+                                    || (thisProperty.propertyValueType == PropertyValueType.ThreeD_SPATIAL)){
+                                    var newKeyInSpatialTangent = thisProperty.keyInSpatialTangent(keys[keys.length - k - 1]);
+                                    var newKeyOutSpatialTangent = thisProperty.keyOutSpatialTangent(keys[keys.length - k - 1]);
+                                    //setting both value and tangents / easing
+                                    thisProperty.setValueAtKey(newKeyIndex, thisProperty.keyValue(keys[keys.length - k - 1]));
+                                    thisProperty.setSpatialTangentsAtKey(newKeyIndex, newKeyOutSpatialTangent, newKeyInSpatialTangent)
+                                }
+                                else{
+                                    var newKeyInTemporalEase = thisProperty.keyInTemporalEase(keys[keys.length - k - 1]);
+                                    var newKeyOutTemporalEase = thisProperty.keyOutTemporalEase(keys[keys.length - k - 1]);
 
-                                var newKeyInTemporalEase = thisProperty.keyInTemporalEase(keys[keys.length - k - 1]);
-                                var newKeyOutTemporalEase = thisProperty.keyOutTemporalEase(keys[keys.length - k - 1]);
-
-                                //setting both value and tangents / easing
-                                thisProperty.setValueAtKey(newKeyIndex, thisProperty.keyValue(keys[keys.length - k - 1]));
-                                thisProperty.setSpatialTangentsAtKey(newKeyIndex, newKeyOutSpatialTangent, newKeyInSpatialTangent)
-                                thisProperty.setTemporalEaseAtKey(newKeyIndex, newKeyOutTemporalEase, newKeyInTemporalEase)
+                                    //setting both value and tangents / easing
+                                    thisProperty.setValueAtKey(newKeyIndex, thisProperty.keyValue(keys[keys.length - k - 1]));
+                                    thisProperty.setTemporalEaseAtKey(newKeyIndex, newKeyOutTemporalEase, newKeyInTemporalEase)
+                                }
 
                                 //updating time
                                 if(k < keys.length - 1){
